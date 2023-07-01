@@ -12,7 +12,7 @@ services:
         volumes:
             - 'dbdata:/var/lib/mysql'
     sonarqube:
-        image: sonarqube:8.9.7-community
+        image: sonarqube:9.2.1-community
         ports:
             - '9000:9000'
             - '9092:9092'
