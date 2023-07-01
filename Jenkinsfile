@@ -25,26 +25,6 @@ pipeline {
             }
         }
         
-        stage('Nexus Deploy ') {
-            steps {
-                nexusArtifactUploader artifacts: [
-                    [
-                        artifactId: 'achat',
-                        classifier: '',
-                        file: 'target/achat.jar',
-                        type: 'jar'
-                    ]
-                ],
-                        credentialsId: 'nexus3',
-                        groupId: 'tn.esprit.rh',
-                        nexusUrl: 'localhost:8081',
-                        nexusVersion: 'nexus3',
-                        protocol: 'http',
-                        repository: 'Achat-release',
-                        version: '1.0.0'
-            }
-        }
-
         stage('Build backend docker image') {
             steps {
                 sh 'docker build -t Saadaoui_tahri_houssem/spring .'
@@ -72,6 +52,25 @@ pipeline {
         stage("SonarQube Analysis") {
             steps {
                 sh 'mvn sonar:sonar -Dsonar.host.url=http://193.95.105.45:9000'
+            }
+        }
+                stage('Nexus Deploy ') {
+            steps {
+                nexusArtifactUploader artifacts: [
+                    [
+                        artifactId: 'achat',
+                        classifier: '',
+                        file: 'target/achat.jar',
+                        type: 'jar'
+                    ]
+                ],
+                        credentialsId: 'nexus3',
+                        groupId: 'tn.esprit.rh',
+                        nexusUrl: 'localhost:8081',
+                        nexusVersion: 'nexus3',
+                        protocol: 'http',
+                        repository: 'Achat-release',
+                        version: '1.0.0'
             }
         }
 
