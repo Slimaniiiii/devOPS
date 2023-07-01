@@ -27,7 +27,7 @@ pipeline {
         
         stage('Build backend docker image') {
             steps {
-                sh 'docker build -t Saadaoui_tahri_houssem/spring .'
+                sh 'docker build -t saadaoui_tahri_houssem/spring .'
             }
         }
 
@@ -38,7 +38,7 @@ pipeline {
                         // Username : yuppi
                         // password : svdwi_Still_in_Brown_E
                         sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-                        sh 'docker push Saadaoui_tahri_houssem/spring'
+                        sh 'docker push saadaoui_tahri_houssem/spring'
                     }
                 }
             }
