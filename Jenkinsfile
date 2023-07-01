@@ -5,7 +5,7 @@ pipeline {
         stage('Pulling from git...') {
             steps {
                 git branch: 'main',
-                        url: 'https://github.com/svdwi/DevOps_Project'
+                        url: 'https://github.com/Slimaniiiii/devOPS'
             }
         }
         
