@@ -37,7 +37,7 @@ pipeline {
                     script {
                         // Username : yuppi
                         // password : svdwi_Still_in_Brown_E
-                        sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                        sh 'docker login -u $DOCKER_USERNAME --password-stdin <<< $DOCKER_PASSWORD'
                         sh 'docker push saadaoui_tahri_houssem/spring'
                     }
                 }
