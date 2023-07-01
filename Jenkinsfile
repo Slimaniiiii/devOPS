@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+        stage("Java Version Check") {
+            steps {
+                sh 'java -version'
+            }
+        }
         stage('Pulling from git...') {
             steps {
                 git branch: 'master',
@@ -22,7 +27,7 @@ pipeline {
         
         stage("SonarQube Analysis") {
             steps {
-                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar -Dsonar.host.url=http://193.95.105.45:9000'
+                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:4.2.0.1873:sonar -Dsonar.host.url=http://193.95.105.45:9000'
             }
         }
         
