@@ -14,6 +14,11 @@ pipeline {
                 sh 'mvn install -DskipTests=true'
             }
         }
+        stage('Deploy') {
+            steps {
+                sh 'docker-compose up -d'
+            }
+        }
         
         stage("SonarQube Analysis") {
             steps {
