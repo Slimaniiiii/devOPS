@@ -9,12 +9,6 @@ pipeline {
             }
         }
         
-        stage('Running the unit test...') {
-            steps {
-                sh 'mvn clean test'
-            }
-        }
-        
         stage("Build") {
             steps {
                 sh 'mvn install -DskipTests=true'
@@ -63,6 +57,12 @@ pipeline {
                         sh 'docker push Saadaoui_tahri_houssem/spring'
                     }
                 }
+            }
+        }
+
+        stage('Running the unit test...') {
+            steps {
+                sh 'mvn clean test'
             }
         }
 
