@@ -25,12 +25,6 @@ pipeline {
             }
         }
         
-        stage("SonarQube Analysis") {
-            steps {
-                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:4.2.0.1873:sonar -Dsonar.host.url=http://193.95.105.45:9000'
-            }
-        }
-        
         stage('Nexus Deploy ') {
             steps {
                 nexusArtifactUploader artifacts: [
@@ -73,6 +67,11 @@ pipeline {
         stage('Running the unit test...') {
             steps {
                 sh 'mvn clean test'
+            }
+        }
+        stage("SonarQube Analysis") {
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://193.95.105.45:9000'
             }
         }
 
