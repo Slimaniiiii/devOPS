@@ -33,12 +33,10 @@ pipeline {
 
         stage('Push images to Dockerhub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     script {
-                        sh "docker login -u ${DOCKER_USERNAME} -p svdwi_Still_in_Brown_E"
+                        sh "docker login -u yupii -p svdwi_Still_in_Brown_E"
                         sh 'docker push saadaoui_tahri_houssem/spring'
                     }
-                }
             }
         }
 
