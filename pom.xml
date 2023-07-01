@@ -85,7 +85,6 @@
             <version>4.2.0.1873</version>
         </dependency>
 
-
     </dependencies>
     <build>
         <finalName>achat</finalName>
@@ -94,7 +93,7 @@
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
-                    <version>3.9.1.2184</version>
+                    <version>4.2.0.1873</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
