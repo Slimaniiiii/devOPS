@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-     tools {
-        jdk 'Java 11' 
-        maven 'Maven' 
-    }
-
     stages {
         stage('Pulling from git...') {
             steps {
