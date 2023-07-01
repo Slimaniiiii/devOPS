@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+     tools {
+        jdk 'Java 11' 
+        maven 'Maven' 
+    }
+
     stages {
         stage('Pulling from git...') {
             steps {
@@ -23,7 +28,6 @@ pipeline {
         stage("SonarQube Analysis") {
             steps {
                 sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.host.url=http://193.95.105.45:9000'
-
             }
         }
         
