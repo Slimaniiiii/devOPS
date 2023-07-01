@@ -22,7 +22,7 @@ pipeline {
         
         stage("SonarQube Analysis") {
             steps {
-                sh 'mvn sonar:sonar'
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://0.0.0.0:9000'
             }
         }
         
