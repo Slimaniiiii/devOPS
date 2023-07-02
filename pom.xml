@@ -79,12 +79,6 @@
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.8</version>
         </dependency>
-        <dependency>
-            <groupId>org.sonarsource.scanner.cli</groupId>
-            <artifactId>sonar-scanner-cli</artifactId>
-            <version>4.2.0.1873</version>
-        </dependency>
-
     </dependencies>
     <build>
         <finalName>achat</finalName>
@@ -93,7 +87,7 @@
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
-                    <version>4.2.0.1873</version>
+                    <version>3.9.1.2184</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
