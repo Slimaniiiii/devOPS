@@ -27,7 +27,7 @@ pipeline {
         
         stage('Build backend docker image') {
             steps {
-                sh 'docker build -t saadaoui_tahri_houssem/spring .'
+                sh 'docker build -t yupii/spring .'
                 sh 'docker images'
             }
         }
@@ -36,8 +36,8 @@ pipeline {
             steps {
                     script {
                         sh "docker login -u yupii -p svdwi_Still_in_Brown_E"
-                        sh "docker tag saadaoui_tahri_houssem/spring saadaoui_tahri_houssem/spring"
-                        sh 'docker push saadaoui_tahri_houssem/spring'
+                        sh "docker tag spring yupii/spring"
+                        sh 'docker push yupii/spring'
                     }
             }
         }
