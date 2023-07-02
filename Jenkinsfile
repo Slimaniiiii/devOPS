@@ -28,6 +28,7 @@ pipeline {
         stage('Build backend docker image') {
             steps {
                 sh 'docker build -t saadaoui_tahri_houssem/spring .'
+                sh 'docker images'
             }
         }
 
