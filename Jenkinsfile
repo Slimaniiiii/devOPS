@@ -47,9 +47,18 @@ pipeline {
                 sh 'mvn clean test'
             }
         }
-        stage("SonarQube Analysis") {
+
+        stage('SonarQube analysis') {
+            tools {
+                jdk "jdk11" 
+            }
+            environment {
+                scannerHome = tool 'SonarQube Scanner' // the name you have given the Sonar Scanner (Global Tool Configuration)
+            }
             steps {
-                sh 'mvn sonar:sonar -Dsonar.host.url=http://193.95.105.45:9000'
+                withSonarQubeEnv(installationName: 'SonarQube') {
+                    sh 'mvn sonar:sonar -Dsonar.host.url=http://193.95.105.45:9000'
+                }
             }
         }
                 stage('Nexus Deploy ') {
