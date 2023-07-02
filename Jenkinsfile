@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    tools {
-        jdk 'jdk11'
-        }
+
     stages {
         stage("Java Version Check") {
             steps {
@@ -50,7 +48,7 @@ pipeline {
             }
         }
         stage("SonarQube Analysis") {
-               
+
           environment {
                 SCANNER_HOME = tool 'scanner'
                 }
