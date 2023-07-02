@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    tools {
+        jdk 'jdk11'
+        }
     stages {
         stage("Java Version Check") {
             steps {
@@ -47,15 +49,17 @@ pipeline {
                 sh 'mvn clean test'
             }
         }
-
-        stage('SonarQube analysis') {
-            steps {
-                withSonarQubeEnv(installationName: 'SonarQube') {
-                    sh 'mvn sonar:sonar -Dsonar.host.url=http://193.95.105.45:9000'
+        stage("SonarQube Analysis") {
+               
+          environment {
+                SCANNER_HOME = tool 'scanner'
                 }
+            steps {
+                sh 'mvn sonar:sonar'
             }
         }
-                stage('Nexus Deploy ') {
+
+        stage('Nexus Deploy ') {
             steps {
                 nexusArtifactUploader artifacts: [
                     [
