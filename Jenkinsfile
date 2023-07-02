@@ -35,7 +35,7 @@ pipeline {
             steps {
                     script {
                         sh "docker login -u yupii -p svdwi_Still_in_Brown_E"
-                        sh "docker tag spring saadaoui_tahri_houssem/spring:latest"
+                        sh "docker tag spring saadaoui_tahri_houssem/spring"
                         sh 'docker push saadaoui_tahri_houssem/spring'
                     }
             }
