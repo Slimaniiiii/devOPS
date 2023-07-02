@@ -27,7 +27,7 @@ pipeline {
         
         stage('Build backend docker image') {
             steps {
-                sh 'docker build -t yupii/spring .'
+                sh 'docker build -t spring .'
                 sh 'docker images'
             }
         }
