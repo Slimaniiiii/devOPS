@@ -49,9 +49,6 @@ pipeline {
         }
 
         stage('SonarQube analysis') {
-            environment {
-                scannerHome = tool 'SonarQube Scanner' // the name you have given the Sonar Scanner (Global Tool Configuration)
-            }
             steps {
                 withSonarQubeEnv(installationName: 'SonarQube') {
                     sh 'mvn sonar:sonar -Dsonar.host.url=http://193.95.105.45:9000'
