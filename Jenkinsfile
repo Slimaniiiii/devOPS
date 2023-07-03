@@ -46,6 +46,25 @@ pipeline {
                     }
             }
         }
+        stage('Nexus Deploy ') {
+           steps {
+                nexusArtifactUploader(
+                nexusVersion: 'nexus3',
+                protocol: 'http',
+                nexusUrl: '193.95.105.45:8081',
+                groupId: 'tn.esprit.rh',
+                version: '1.0.0',
+                repository: 'Achat-release',
+                credentialsId: 'nexusid',
+                artifacts: [
+                    [  artifactId: 'achat',
+                        classifier: '',
+                        file: 'target/achat.jar',
+                        type: 'jar']
+                ]
+                )
+                        }
+                    }
 
 
         stage("SonarQube Analysis") {
@@ -70,26 +89,6 @@ pipeline {
                 sh 'mvn test'
             }
         }
-
-        stage('Nexus Deploy ') {
-           steps {
-                nexusArtifactUploader(
-                nexusVersion: 'nexus3',
-                protocol: 'http',
-                nexusUrl: '193.95.105.45:8081',
-                groupId: 'tn.esprit.rh',
-                version: '1.0.0',
-                repository: 'Achat-release',
-                credentialsId: 'nexusid',
-                artifacts: [
-                    [  artifactId: 'achat',
-                        classifier: '',
-                        file: 'target/achat.jar',
-                        type: 'jar']
-                ]
-                )
-                        }
-                    }
  
         stage("Email notification sender ...") {
             steps {
