@@ -47,7 +47,11 @@ pipeline {
                 sh 'mvn clean test'
             }
         }
-    
+        // stage("SonarQube Analysis") {
+        //     steps {
+        //         sh 'mvn sonar:sonar'
+        //     }
+        // }
 
         stage('Nexus Deploy ') {
             steps {
@@ -68,11 +72,6 @@ pipeline {
                         version: '1.0.0'
             }
         }
-            // stage("SonarQube Analysis") {
-        //     steps {
-        //         sh 'mvn sonar:sonar'
-        //     }
-        // }
 
         stage("Email notification sender ...") {
             steps {
