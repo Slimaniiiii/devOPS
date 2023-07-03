@@ -47,12 +47,7 @@ pipeline {
             }
         }
 
-        stage('Running the unit test...') {
-            steps {
-                sh 'mvn clean test'
-            }
-        }
-        
+
         stage("SonarQube Analysis") {
             environment {
                 scannerHome = tool "${SONARSCANNER}"
@@ -70,8 +65,13 @@ pipeline {
                 }
             }
         }
+        stage('Running the unit test...') {
+            steps {
+                sh 'mvn test'
+            }
+        }
 
-               stage('Nexus Deploy ') {
+        stage('Nexus Deploy ') {
             steps {
                 nexusArtifactUploader(
         nexusVersion: 'nexus3',
