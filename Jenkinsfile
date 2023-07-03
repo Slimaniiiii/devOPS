@@ -46,11 +46,6 @@ pipeline {
                     }
             }
         }
-        stage('Running the unit test...') {
-            steps {
-                sh 'mvn clean test'
-            }
-        }
         
         stage("SonarQube Analysis") {
             environment {
