@@ -24,11 +24,11 @@ pipeline {
                 sh 'mvn install -DskipTests=true'
             }
         }
-        stage('Deploy') {
-            steps {
-                sh 'docker-compose up -d'
-            }
-        }
+        // stage('Deploy') {
+        //     steps {
+        //         sh 'docker-compose up -d'
+        //     }
+        // }
         
         stage('Build backend docker image') {
             steps {
