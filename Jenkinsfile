@@ -61,7 +61,7 @@ pipeline {
                 ],
                         credentialsId: 'nexus3',
                         groupId: 'tn.esprit.rh',
-                        nexusUrl: 'localhost:8081',
+                        nexusUrl: 'http://193.95.105.45:8081',
                         nexusVersion: 'nexus3',
                         protocol: 'http',
                         repository: 'Achat-release',
