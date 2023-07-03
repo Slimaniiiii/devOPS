@@ -51,21 +51,21 @@ pipeline {
 
         stage('Nexus Deploy ') {
             steps {
-                nexusArtifactUploader artifacts: [
-                    [
-                        artifactId: 'achat',
-                        classifier: '',
-                        file: 'target/achat.jar',
-                        type: 'jar'
-                    ]
-                ],
-                        credentialsId: 'nexus3',
-                        groupId: 'tn.esprit.rh',
-                        nexusUrl: 'http://193.95.105.45:8081',
-                        nexusVersion: 'nexus3',
-                        protocol: 'http',
-                        repository: 'Achat-release',
-                        version: '1.0.0'
+                nexusArtifactUploader(
+        nexusVersion: 'nexus3',
+        protocol: 'http',
+        nexusUrl: 'http://193.95.105.45:8081',
+        groupId: 'tn.esprit.rh',
+        version: '1.0.0',
+        repository: 'Achat-release',
+        credentialsId: 'nexus3',
+        artifacts: [
+            [  artifactId: 'achat',
+                classifier: '',
+                file: 'target/achat.jar',
+                type: 'jar']
+        ]
+     )
             }
         }
         // stage("SonarQube Analysis") {
