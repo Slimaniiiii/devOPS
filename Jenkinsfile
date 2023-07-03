@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment{
+        SONARSERVER = 'sonarserver'
+        SONARSCANNER = 'sonarscanner'
+    }
 
     stages {
         stage("Java Version Check") {
@@ -43,8 +47,20 @@ pipeline {
         }
         
         stage("SonarQube Analysis") {
+            environment {
+                scannerHome = tool "${SONARSCANNER}"
+            }
             steps {
-                sh 'mvn sonar:sonar'
+                withSonarQubeEnv("${SONARSERVER}"){
+                    sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=devOPS \
+                    -Dsonar.projectName=devOPS \
+                    -Dsonar.projectVersion=1.0 \
+                    -Dsonar.sources=src/ \
+                    -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
+                    -Dsonar.junit.reportsPath=target/surefile-reports/ \
+                    -Dsonar.jacoco.reportPaths=target/jacoco.exec \
+                    -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+                }
             }
         }
 
