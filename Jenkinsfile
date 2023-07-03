@@ -42,14 +42,7 @@ pipeline {
             }
         }
 
-        stage('Running the unit test...') {
-            steps {
-                sh 'mvn clean test'
-            }
-        }
-
-
-        stage('Nexus Deploy ') {
+               stage('Nexus Deploy ') {
             steps {
                 nexusArtifactUploader(
         nexusVersion: 'nexus3',
@@ -68,6 +61,15 @@ pipeline {
      )
             }
         }
+
+        stage('Running the unit test...') {
+            steps {
+                sh 'mvn clean test'
+            }
+        }
+
+
+ 
         // stage("SonarQube Analysis") {
         //     steps {
         //         sh 'mvn sonar:sonar'
