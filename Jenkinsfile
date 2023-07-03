@@ -46,42 +46,6 @@ pipeline {
                     }
             }
         }
-                stage("Nexus Deploy") {
-            steps {
-                script {
-                    pom = readMavenPom file: "pom.xml";
-                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                    artifactPath = filesByGlob[0].path;
-                    artifactExists = fileExists artifactPath;
-                    if(artifactExists) {
-                        echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version} ARTVERSION";
-                        nexusArtifactUploader(
-                            nexusVersion: 'nexus3',
-                            protocol: 'http',
-                            nexusUrl: 'http://193.95.105.45:8081',
-                            groupId: 'tn.esprit.rh',
-                            version: '1.0.0',
-                            repository: 'Achat-release',
-                            credentialsId: 'nexusid',
-                            artifacts: [
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: artifactPath,
-                                type: pom.packaging],
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: "pom.xml",
-                                type: "pom"]
-                            ]
-                        );
-                    } 
-		    else {
-                        error "*** File: ${artifactPath}, could not be found";
-                    }
-                }
-            }
-        }
 
 
         stage("SonarQube Analysis") {
@@ -107,26 +71,25 @@ pipeline {
             }
         }
 
-        // stage('Nexus Deploy ') {
-        //    steps {
-        //         nexusArtifactUploader(
-        //         nexusVersion: 'nexus3',
-        //         protocol: 'http',
-        //         nexusUrl: 'http://193.95.105.45:8081',
-        //         groupId: 'tn.esprit.rh',
-        //         version: '1.0.0',
-        //         repository: 'Achat-release',
-        //         credentialsId: 'nexusid',
-        //         artifacts: [
-        //             [  artifactId: 'achat',
-        //                 classifier: '',
-        //                 file: 'target/achat.jar',
-        //                 type: 'jar']
-        //         ]
-        //         )
-        //                 }
-        //             }
-
+        stage('Nexus Deploy ') {
+           steps {
+                nexusArtifactUploader(
+                nexusVersion: 'nexus3',
+                protocol: 'http',
+                nexusUrl: 'http://193.95.105.45:8081',
+                groupId: 'tn.esprit.rh',
+                version: '1.0.0',
+                repository: 'Achat-release',
+                credentialsId: 'nexusid',
+                artifacts: [
+                    [  artifactId: 'achat',
+                        classifier: '',
+                        file: 'target/achat.jar',
+                        type: 'jar']
+                ]
+                )
+                        }
+                    }
  
         stage("Email notification sender ...") {
             steps {
