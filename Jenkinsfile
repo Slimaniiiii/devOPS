@@ -57,6 +57,7 @@ pipeline {
                     -Dsonar.projectName=devOPS \
                     -Dsonar.projectVersion=1.0 \
                     -Dsonar.sources=src/ \
+                    -Dsonar.java.binaries=target/classes \
                     -Dsonar.junit.reportsPath=target/surefile-reports/ \
                     -Dsonar.jacoco.reportPaths=target/jacoco.exec \
                     -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
