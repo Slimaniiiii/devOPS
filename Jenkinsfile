@@ -19,11 +19,11 @@ pipeline {
                 sh 'mvn install -DskipTests=true'
             }
         }
-        // stage('Deploy') {
-        //     steps {
-        //         sh 'docker-compose up -d'
-        //     }
-        // }
+        stage('Deploy') {
+            steps {
+                sh 'docker-compose up -d'
+            }
+        }
         
         stage('Build backend docker image') {
             steps {
@@ -39,6 +39,12 @@ pipeline {
                         sh "docker tag spring yupii/spring"
                         sh 'docker push yupii/spring'
                     }
+            }
+        }
+        
+        stage("SonarQube Analysis") {
+            steps {
+                sh 'mvn sonar:sonar'
             }
         }
 
@@ -70,11 +76,6 @@ pipeline {
 
 
  
-        // stage("SonarQube Analysis") {
-        //     steps {
-        //         sh 'mvn sonar:sonar'
-        //     }
-        // }
         stage("Email notification sender ...") {
             steps {
                 emailext attachLog: true, body: "${env.BUILD_URL} has result ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'saadaoui.mohamedaziz@esprit.tn,mohamedaziz.tahri@esprit.tn,houssem.slimani@esprit.tn'
