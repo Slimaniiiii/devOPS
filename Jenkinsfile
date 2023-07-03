@@ -76,7 +76,7 @@ pipeline {
                 nexusArtifactUploader(
                 nexusVersion: 'nexus3',
                 protocol: 'http',
-                nexusUrl: 'http://193.95.105.45:8081',
+                nexusUrl: '193.95.105.45:8081',
                 groupId: 'tn.esprit.rh',
                 version: '1.0.0',
                 repository: 'Achat-release',
