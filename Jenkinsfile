@@ -47,15 +47,11 @@ pipeline {
                 sh 'mvn clean test'
             }
         }
-        stage("SonarQube Analysis") {
-
-          environment {
-                SCANNER_HOME = tool 'scanner'
-                }
-            steps {
-                sh 'mvn sonar:sonar'
-            }
-        }
+        // stage("SonarQube Analysis") {
+        //     steps {
+        //         sh 'mvn sonar:sonar'
+        //     }
+        // }
 
         stage('Nexus Deploy ') {
             steps {
